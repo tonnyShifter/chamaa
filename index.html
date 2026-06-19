@@ -306,6 +306,10 @@ const MLABELS = [
   'May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25',
   'Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26'
 ];
+// Special amounts for months that differ from the standard monthly amount
+const MONTH_AMOUNTS = {
+  '2025-05': 300  // First month everyone paid 300 instead of 500
+};
 
 const MEMBERS0 = [
   {id:'m1',name:'Gachara'},{id:'m2',name:'Macharia'},{id:'m3',name:'Karanja'},
@@ -474,7 +478,7 @@ function renderOverview() {
   const paid = D.members.filter(m=>pay[m.id]==='paid').length;
   const total = D.members.length;
   const amt = D.monthlyAmount;
-  const totalCollected = MONTHS.reduce((s,m2)=>s+D.members.filter(mb=>(D.payments[m2]||{})[mb.id]==='paid').length*amt,0);
+  const totalCollected = MONTHS.reduce((s,m2)=>s+D.members.filter(mb=>(D.payments[m2]||{})[mb.id]==='paid').length*(MONTH_AMOUNTS[m2]||amt),0);
 
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat"><div class="stat-label">Members</div><div class="stat-val">${total}</div></div>
@@ -505,7 +509,8 @@ function renderOverview() {
 
 function renderHistory() {
   const totals = {};
-  D.members.forEach(m => { totals[m.id]=MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[m.id]==='paid'?D.monthlyAmount:0),0); });
+  function moAmt(mo){return MONTH_AMOUNTS[mo]||D.monthlyAmount;}
+  D.members.forEach(m => { totals[m.id]=MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[m.id]==='paid'?moAmt(mo):0),0); });
   let h = '<table class="history-table"><thead><tr><th>Name</th>';
   MLABELS.forEach(l=>{h+=`<th>${l}</th>`;});
   h += '<th>Total</th></tr></thead><tbody>';
@@ -513,11 +518,11 @@ function renderHistory() {
     h += `<tr><td>${m.name}</td>`;
     MONTHS.forEach(mo => {
       const paid=(D.payments[mo]||{})[m.id]==='paid';
-      h+=`<td class="${paid?'cell-paid':'cell-unpaid'}">${paid?D.monthlyAmount:'—'}</td>`;
+      h+=`<td class="${paid?'cell-paid':'cell-unpaid'}">${paid?moAmt(mo):'—'}</td>`;
     });
     h+=`<td style="font-weight:700">${totals[m.id].toLocaleString()}</td></tr>`;
   });
-  const colTotals=MONTHS.map(mo=>D.members.filter(m=>(D.payments[mo]||{})[m.id]==='paid').length*D.monthlyAmount);
+  const colTotals=MONTHS.map(mo=>D.members.filter(m=>(D.payments[mo]||{})[m.id]==='paid').length*moAmt(mo));
   const grand=colTotals.reduce((a,b)=>a+b,0);
   h+=`<tr class="total-row"><td>TOTAL</td>`;
   colTotals.forEach(t=>{h+=`<td>${t.toLocaleString()}</td>`;});
@@ -575,7 +580,7 @@ function renderAdmin() {
   document.getElementById('setAmount').value=D.monthlyAmount;
   document.getElementById('setCycleMonth').value=D.cycleMonth;
   const totals={};
-  D.members.forEach(m=>{totals[m.id]=MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[m.id]==='paid'?D.monthlyAmount:0),0);});
+  D.members.forEach(m=>{totals[m.id]=MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[m.id]==='paid'?(MONTH_AMOUNTS[mo]||D.monthlyAmount):0),0);});
   document.getElementById('adminMembersBody').innerHTML=D.members.map((m,i)=>`
     <tr><td style="color:var(--text3)">${i+1}</td><td style="font-weight:500">${m.name}</td>
     <td>KES ${totals[m.id].toLocaleString()}</td>
