@@ -298,14 +298,25 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
 
-const MONTHS = [
-  '2025-05','2025-06','2025-07','2025-08','2025-09','2025-10',
-  '2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06'
-];
-const MLABELS = [
-  'May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25',
-  'Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26'
-];
+// Dynamically generate all months from May 2025 up to current month
+function generateMonths() {
+  const start = new Date(2025, 4, 1);
+  const now = new Date();
+  const end = new Date(now.getFullYear(), now.getMonth(), 1);
+  const months = [], labels = [];
+  const mNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let cur = new Date(start);
+  while (cur <= end) {
+    const y = cur.getFullYear();
+    const m = cur.getMonth();
+    const mm = String(m+1).padStart(2,'0');
+    months.push(y+'-'+mm);
+    labels.push(mNames[m]+' '+String(y).slice(2));
+    cur.setMonth(cur.getMonth()+1);
+  }
+  return { months, labels };
+}
+const { months: MONTHS, labels: MLABELS } = generateMonths();
 // Special amounts for months that differ from the standard monthly amount
 const MONTH_AMOUNTS = {
   '2025-05': 300  // First month everyone paid 300 instead of 500
@@ -364,7 +375,7 @@ function buildPayments() {
 function freshData() {
   return {
     adminPw:'Thika1admin', memberPw:'Thika1',
-    monthlyAmount:500, cycleMonth:'2026-06',
+    monthlyAmount:500, cycleMonth:MONTHS[MONTHS.length-1],
     members:JSON.parse(JSON.stringify(MEMBERS0)),
     payments:buildPayments(),
     loans:JSON.parse(JSON.stringify(LOANS0)),
