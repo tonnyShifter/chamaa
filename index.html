@@ -38,10 +38,11 @@
   .nav::-webkit-scrollbar{display:none}
   .nav-btn{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;border:none;background:none;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color 0.15s}
   .nav-btn.active{color:var(--text);border-bottom-color:var(--green)}
-  .content{max-width:760px;margin:0 auto;padding:1.25rem 1rem 3rem}
+  .content{max-width:780px;margin:0 auto;padding:1.25rem 1rem 3rem}
   .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem 1.25rem;margin-bottom:1rem}
   .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
   .card-title{font-size:15px;font-weight:600}
+  .card-sub{font-size:12px;color:var(--text2);margin-top:-6px;margin-bottom:10px}
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem}
   .stat{background:var(--bg2);border-radius:var(--radius);padding:1rem}
   .stat-label{font-size:11px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px}
@@ -62,9 +63,13 @@
   .pill-unpaid{background:var(--red-light);color:#a32d2d}
   .pill-active{background:var(--amber-light);color:#854f0b}
   .pill-cleared{background:var(--green-light);color:#0f6e56}
-  @media(prefers-color-scheme:dark){.pill-paid{color:#5dcaa5}.pill-unpaid{color:#f09595}.pill-active{color:#ef9f27}.pill-cleared{color:#5dcaa5}}
+  .pill-green{background:var(--green-light);color:#0f6e56}
+  .pill-red{background:var(--red-light);color:#a32d2d}
+  @media(prefers-color-scheme:dark){.pill-paid{color:#5dcaa5}.pill-unpaid{color:#f09595}.pill-active{color:#ef9f27}.pill-cleared{color:#5dcaa5}.pill-green{color:#5dcaa5}.pill-red{color:#f09595}}
   .progress-bar{height:7px;border-radius:4px;background:var(--bg3);overflow:hidden;margin:8px 0 4px}
   .progress-fill{height:100%;border-radius:4px;background:var(--green);transition:width 0.4s}
+  .progress-fill.red{background:var(--red)}
+  .progress-fill.amber{background:var(--amber)}
   .member-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:0.5px solid var(--border)}
   .member-row:last-child{border-bottom:none}
   .member-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
@@ -83,20 +88,29 @@
   .loans-table th{text-align:left;font-weight:600;color:var(--text2);padding:7px 10px;border-bottom:0.5px solid var(--border);font-size:12px}
   .loans-table td{padding:9px 10px;border-bottom:0.5px solid var(--border);vertical-align:middle}
   .loans-table tr:last-child td{border-bottom:none}
+  .loan-card{border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px}
+  .loan-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .loan-name{font-weight:600;font-size:14px}
+  .loan-meta{font-size:12px;color:var(--text2);display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-bottom:8px}
+  .loan-meta b{color:var(--text);font-weight:600}
+  .loan-progress{margin-bottom:8px}
+  .payment-hist{font-size:11px;color:var(--text3);margin-top:6px;border-top:0.5px dashed var(--border);padding-top:6px}
+  .payment-hist-row{display:flex;justify-content:space-between;padding:2px 0}
   .minute-entry{padding:12px 0;border-bottom:0.5px solid var(--border)}
   .minute-entry:last-child{border-bottom:none}
   .minute-date{font-size:12px;color:var(--text3);margin-bottom:5px;display:flex;align-items:center;justify-content:space-between}
   .minute-text{font-size:14px;line-height:1.65;color:var(--text)}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center;padding:1rem}
   .modal-overlay.open{display:flex}
-  .modal-box{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:1.5rem;width:100%;max-width:400px;max-height:90vh;overflow-y:auto}
+  .modal-box{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:1.5rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto}
   .modal-title{font-size:17px;font-weight:700;margin-bottom:1.1rem}
   .modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
   .error-msg{color:var(--red);font-size:13px;margin-bottom:8px;display:none}
+  .notice{font-size:12.5px;color:var(--text2);background:var(--bg2);border-radius:var(--radius);padding:10px 12px;margin-bottom:10px}
   .section{display:none}.section.active{display:block}
   .sync-bar{background:var(--amber-light);color:var(--amber);font-size:12px;text-align:center;padding:6px;display:none}
   .sync-bar.show{display:block}
-  @media(max-width:500px){.form-row{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.topbar-sub{display:none}}
+  @media(max-width:500px){.form-row{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.topbar-sub{display:none}.loan-meta{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -123,7 +137,7 @@
       <div class="topbar-logo">CG</div>
       <div>
         <div class="topbar-name">Chamaa Group</div>
-        <div class="topbar-sub">Thika · May 2025 – Jun 2026</div>
+        <div class="topbar-sub">Thika · since May 2025</div>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
@@ -136,6 +150,7 @@
     <button class="nav-btn active" onclick="switchTab('overview',this)">📊 Overview</button>
     <button class="nav-btn" onclick="switchTab('history',this)">📋 History</button>
     <button class="nav-btn" onclick="switchTab('loans',this)">💰 Loans</button>
+    <button class="nav-btn" onclick="switchTab('eligibility',this)">📈 Eligibility</button>
     <button class="nav-btn" onclick="switchTab('minutes',this)">📝 Minutes</button>
     <button class="nav-btn" id="adminTab" style="display:none" onclick="switchTab('admin',this)">⚙️ Admin</button>
   </nav>
@@ -161,7 +176,7 @@
     <!-- History -->
     <div class="section" id="sec-history">
       <div class="card">
-        <div class="card-header"><span class="card-title">Full payment history</span><span style="font-size:12px;color:var(--text2)">May 2025 – Jun 2026</span></div>
+        <div class="card-header"><span class="card-title">Full payment history</span><span style="font-size:12px;color:var(--text2)" id="historyRange"></span></div>
         <div class="history-wrap" id="historyTable"></div>
       </div>
       <div class="card">
@@ -177,11 +192,18 @@
           <span class="card-title">Loans & welfare</span>
           <button class="btn btn-sm" id="addLoanBtn" style="display:none" onclick="openModal('loanModal')">+ Add loan</button>
         </div>
+        <div class="card-sub">All loans carry a fixed 10% one-time interest, added when issued.</div>
         <div id="loanSummary" style="margin-bottom:12px"></div>
-        <table class="loans-table">
-          <thead><tr><th>Member</th><th>Amount (KES)</th><th>Status</th><th id="loanActHead" style="display:none">Action</th></tr></thead>
-          <tbody id="loansBody"></tbody>
-        </table>
+        <div id="loansCards"></div>
+      </div>
+    </div>
+
+    <!-- Eligibility -->
+    <div class="section" id="sec-eligibility">
+      <div class="card">
+        <div class="card-header"><span class="card-title">Loan eligibility</span></div>
+        <div class="notice">A member can borrow up to <b>80%</b> of their all-time total contributions. The percentage shown is (loan balance + remaining interest) ÷ total contributions. <span style="color:#a32d2d;font-weight:600">Red</span> = over 80% (at or near limit). <span style="color:#0f6e56;font-weight:600">Green</span> = within safe limit.</div>
+        <div id="eligibilityList"></div>
       </div>
     </div>
 
@@ -227,6 +249,7 @@
             <select id="setCycleMonth" style="margin-bottom:10px"></select>
           </div>
         </div>
+        <div class="notice" style="margin-top:0">Loan interest rate is fixed at <b>10%</b> and cannot be changed.</div>
         <label class="form-label">Admin password (keep private)</label>
         <input type="password" id="setAdminPw" placeholder="Leave blank to keep current"/>
         <label class="form-label">Member view password</label>
@@ -255,13 +278,37 @@
     <div class="modal-title">Record loan</div>
     <label class="form-label">Member</label>
     <select id="loanMember"></select>
-    <label class="form-label">Amount (KES)</label>
-    <input type="number" id="loanAmount" placeholder="e.g. 3000"/>
+    <label class="form-label">Amount borrowed (KES)</label>
+    <input type="number" id="loanAmount" placeholder="e.g. 3000" oninput="updateLoanPreview()"/>
+    <div class="notice" id="loanPreview" style="margin-top:-4px">Interest (10%): KES 0 · Total owed: KES 0</div>
     <label class="form-label">Notes (optional)</label>
     <input type="text" id="loanNotes" placeholder="e.g. school fees, medical..."/>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('loanModal')">Cancel</button>
       <button class="btn btn-primary" onclick="addLoan()">Save loan</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal-box">
+    <div class="modal-title">Record partial payment</div>
+    <div class="notice" id="paymentLoanInfo"></div>
+    <div class="form-row">
+      <div>
+        <label class="form-label">Principal paid (KES)</label>
+        <input type="number" id="payPrincipal" placeholder="e.g. 4000"/>
+      </div>
+      <div>
+        <label class="form-label">Interest paid (KES)</label>
+        <input type="number" id="payInterest" placeholder="e.g. 400"/>
+      </div>
+    </div>
+    <label class="form-label">Date (optional)</label>
+    <input type="date" id="payDate"/>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('paymentModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="recordPayment()">Save payment</button>
     </div>
   </div>
 </div>
@@ -298,6 +345,8 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
 
+const LOAN_INTEREST_RATE = 0.10; // Fixed 10% forever — not editable
+
 // Dynamically generate all months from May 2025 up to current month
 function generateMonths() {
   const start = new Date(2025, 4, 1);
@@ -317,10 +366,7 @@ function generateMonths() {
   return { months, labels };
 }
 const { months: MONTHS, labels: MLABELS } = generateMonths();
-// Special amounts for months that differ from the standard monthly amount
-const MONTH_AMOUNTS = {
-  '2025-05': 300  // First month everyone paid 300 instead of 500
-};
+const MONTH_AMOUNTS = { '2025-05': 300 };
 
 const MEMBERS0 = [
   {id:'m1',name:'Gachara'},{id:'m2',name:'Macharia'},{id:'m3',name:'Karanja'},
@@ -348,26 +394,33 @@ const RAW = {
   m15:[0,0,0,0,0,0,0,0,500,500,500,0,0,0]
 };
 
+// Loans now carry: principal, interest (10% of principal, fixed), and payments[] array
+// Each payment: {date, principal, interest}
+function makeLoan(id, memberId, principal, notes, payments) {
+  const interest = Math.round(principal * LOAN_INTEREST_RATE);
+  return { id, memberId, principal, interest, notes: notes||'', payments: payments||[] };
+}
+
 const LOANS0 = [
-  {id:'l1',memberId:'m3',amount:3000,status:'active',notes:''},
-  {id:'l2',memberId:'m11',amount:1000,status:'active',notes:''},
-  {id:'l3',memberId:'m2',amount:4000,status:'active',notes:''},
-  {id:'l4',memberId:'m10',amount:3000,status:'active',notes:''},
-  {id:'l5',memberId:'m13',amount:3500,status:'active',notes:''},
-  {id:'l6',memberId:'m14',amount:1500,status:'active',notes:''},
-  {id:'l7',memberId:'m6',amount:1000,status:'active',notes:''},
-  {id:'l8',memberId:'m9',amount:4500,status:'active',notes:''},
-  {id:'l9',memberId:'m7',amount:2000,status:'active',notes:''},
-  {id:'l10',memberId:'m4',amount:1500,status:'active',notes:''},
-  {id:'l11',memberId:'m1',amount:3300,status:'active',notes:''},
-  {id:'l12',memberId:'m8',amount:6300,status:'active',notes:''},
+  makeLoan('l1','m3',3000,''),
+  makeLoan('l2','m11',1000,''),
+  makeLoan('l3','m2',4000,''),
+  makeLoan('l4','m10',3000,''),
+  makeLoan('l5','m13',3500,''),
+  makeLoan('l6','m14',1500,''),
+  makeLoan('l7','m6',1000,''),
+  makeLoan('l8','m9',4500,''),
+  makeLoan('l9','m7',2000,''),
+  makeLoan('l10','m4',1500,''),
+  makeLoan('l11','m1',3300,''),
+  makeLoan('l12','m8',6300,''),
 ];
 
 function buildPayments() {
   const p = {};
   MONTHS.forEach((mo,i) => {
     p[mo] = {};
-    MEMBERS0.forEach(m => { p[mo][m.id] = RAW[m.id][i] > 0 ? 'paid' : 'unpaid'; });
+    MEMBERS0.forEach(m => { p[mo][m.id] = (RAW[m.id] && RAW[m.id][i] > 0) ? 'paid' : 'unpaid'; });
   });
   return p;
 }
@@ -385,33 +438,42 @@ function freshData() {
 
 let D = freshData();
 let isAdmin = false;
-let selMonth = '2026-06';
+let selMonth = MONTHS[MONTHS.length-1];
+let activeLoanIdForPayment = null;
 
-// Load from Firebase, seed if empty
 async function loadFromFirebase() {
   const snap = await get(ref(db, 'chamaa'));
   if (snap.exists()) {
     D = snap.val();
-    // ensure arrays
     if (!D.members) D.members = [];
     if (!D.loans) D.loans = [];
     if (!D.minutes) D.minutes = [];
     if (!D.payments) D.payments = {};
+    // Migrate old loan format (status/amount) to new format (principal/interest/payments) if needed
+    D.loans = D.loans.map(l => migrateLoan(l));
   } else {
-    // First time — seed with initial data
     await set(ref(db, 'chamaa'), D);
   }
 }
 
+function migrateLoan(l) {
+  if (l.principal !== undefined) return l; // already new format
+  const principal = Number(l.amount || 0);
+  const interest = Math.round(principal * LOAN_INTEREST_RATE);
+  const payments = [];
+  if (l.status === 'cleared') {
+    payments.push({date:'', principal: principal, interest: interest});
+  }
+  return { id:l.id, memberId:l.memberId, principal, interest, notes:l.notes||'', payments };
+}
+
 async function saveToFirebase() {
   document.getElementById('syncBar').classList.add('show');
-  try {
-    await set(ref(db, 'chamaa'), D);
-  } catch(e) { alert('Save failed: ' + e.message); }
+  try { await set(ref(db, 'chamaa'), D); }
+  catch(e){ alert('Save failed: ' + e.message); }
   document.getElementById('syncBar').classList.remove('show');
 }
 
-// Listen for real-time changes from other devices
 function listenForChanges() {
   onValue(ref(db, 'chamaa'), (snap) => {
     if (snap.exists()) {
@@ -421,9 +483,8 @@ function listenForChanges() {
       if (!D.loans) D.loans = [];
       if (!D.minutes) D.minutes = [];
       if (!D.payments) D.payments = {};
-      if (document.getElementById('mainApp').style.display !== 'none') {
-        render();
-      }
+      D.loans = D.loans.map(l => migrateLoan(l));
+      if (document.getElementById('mainApp').style.display !== 'none') render();
     }
   });
 }
@@ -445,7 +506,6 @@ function enter() {
   document.getElementById('adminTab').style.display = isAdmin ? '' : 'none';
   document.getElementById('addLoanBtn').style.display = isAdmin ? '' : 'none';
   document.getElementById('addMinutesBtn').style.display = isAdmin ? '' : 'none';
-  document.getElementById('loanActHead').style.display = isAdmin ? '' : 'none';
   buildSelectors();
   render();
 }
@@ -463,16 +523,17 @@ function buildSelectors() {
   ['monthSelector','adminMonthSel','setCycleMonth'].forEach(id => {
     document.getElementById(id).innerHTML = opts;
   });
-  selMonth = D.cycleMonth || '2026-06';
+  selMonth = D.cycleMonth || MONTHS[MONTHS.length-1];
   document.getElementById('monthSelector').value = selMonth;
   document.getElementById('adminMonthSel').value = selMonth;
   document.getElementById('setCycleMonth').value = selMonth;
+  document.getElementById('historyRange').textContent = MLABELS[0] + ' – ' + MLABELS[MLABELS.length-1];
 }
 
 function onMonthChange() { selMonth = document.getElementById('monthSelector').value; renderOverview(); }
 window.onMonthChange = onMonthChange;
 
-function render() { renderOverview(); renderHistory(); renderLoans(); renderMinutes(); if(isAdmin) renderAdmin(); }
+function render() { renderOverview(); renderHistory(); renderLoans(); renderEligibility(); renderMinutes(); if(isAdmin) renderAdmin(); }
 
 function mLabel(mo) { return MLABELS[MONTHS.indexOf(mo)] || mo; }
 function memberName(id) { return (D.members.find(m=>m.id===id)||{name:'?'}).name; }
@@ -480,6 +541,23 @@ function initials(name) { return name.split(' ').map(w=>w[0]).join('').toUpperCa
 function avatarColor(name) {
   const colors=['#1D9E75','#378ADD','#D85A30','#D4537E','#7F77DD','#BA7517'];
   let h=0; for(let c of name) h=(h*31+c.charCodeAt(0))%colors.length; return colors[h];
+}
+function moAmt(mo){ return MONTH_AMOUNTS[mo]||D.monthlyAmount; }
+
+// ---- Loan math helpers ----
+function loanPaidPrincipal(l) { return (l.payments||[]).reduce((s,p)=>s+Number(p.principal||0),0); }
+function loanPaidInterest(l) { return (l.payments||[]).reduce((s,p)=>s+Number(p.interest||0),0); }
+function loanPrincipalBalance(l) { return Math.max(0, l.principal - loanPaidPrincipal(l)); }
+function loanInterestBalance(l) { return Math.max(0, l.interest - loanPaidInterest(l)); }
+function loanTotalOwed(l) { return l.principal + l.interest; }
+function loanTotalPaid(l) { return loanPaidPrincipal(l) + loanPaidInterest(l); }
+function loanRemaining(l) { return loanPrincipalBalance(l) + loanInterestBalance(l); }
+function loanIsCleared(l) { return loanRemaining(l) <= 0; }
+function memberTotalContrib(memberId) {
+  return MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[memberId]==='paid'?moAmt(mo):0),0);
+}
+function memberOutstandingLoanTotal(memberId) {
+  return D.loans.filter(l=>l.memberId===memberId).reduce((s,l)=>s+loanRemaining(l),0);
 }
 
 function renderOverview() {
@@ -494,7 +572,7 @@ function renderOverview() {
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat"><div class="stat-label">Members</div><div class="stat-val">${total}</div></div>
     <div class="stat"><div class="stat-label">Paid — ${label}</div><div class="stat-val green">${paid}/${total}</div></div>
-    <div class="stat"><div class="stat-label">Collected — ${label}</div><div class="stat-val">KES ${(paid*amt).toLocaleString()}</div></div>
+    <div class="stat"><div class="stat-label">Collected — ${label}</div><div class="stat-val">KES ${(paid*moAmt(mo)).toLocaleString()}</div></div>
     <div class="stat"><div class="stat-label">All-time total</div><div class="stat-val">KES ${totalCollected.toLocaleString()}</div></div>`;
 
   const pct = total ? Math.round(paid/total*100) : 0;
@@ -520,8 +598,7 @@ function renderOverview() {
 
 function renderHistory() {
   const totals = {};
-  function moAmt(mo){return MONTH_AMOUNTS[mo]||D.monthlyAmount;}
-  D.members.forEach(m => { totals[m.id]=MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[m.id]==='paid'?moAmt(mo):0),0); });
+  D.members.forEach(m => { totals[m.id]=memberTotalContrib(m.id); });
   let h = '<table class="history-table"><thead><tr><th>Name</th>';
   MLABELS.forEach(l=>{h+=`<th>${l}</th>`;});
   h += '<th>Total</th></tr></thead><tbody>';
@@ -553,31 +630,90 @@ function renderHistory() {
 }
 
 function renderLoans() {
-  const active=D.loans.filter(l=>l.status==='active');
-  const cleared=D.loans.filter(l=>l.status==='cleared');
-  const total=active.reduce((a,l)=>a+Number(l.amount),0);
-  document.getElementById('loanSummary').innerHTML=`
+  const totalOutstanding = D.loans.reduce((s,l)=>s+loanRemaining(l),0);
+  const activeCount = D.loans.filter(l=>!loanIsCleared(l)).length;
+  const clearedCount = D.loans.filter(l=>loanIsCleared(l)).length;
+  document.getElementById('loanSummary').innerHTML = `
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <div class="stat" style="flex:1;min-width:140px"><div class="stat-label">Outstanding</div><div class="stat-val red">KES ${total.toLocaleString()}</div></div>
-      <div class="stat" style="flex:1;min-width:140px"><div class="stat-label">Active loans</div><div class="stat-val">${active.length}</div></div>
-      <div class="stat" style="flex:1;min-width:140px"><div class="stat-label">Cleared</div><div class="stat-val green">${cleared.length}</div></div>
+      <div class="stat" style="flex:1;min-width:140px"><div class="stat-label">Outstanding (incl. interest)</div><div class="stat-val red">KES ${totalOutstanding.toLocaleString()}</div></div>
+      <div class="stat" style="flex:1;min-width:140px"><div class="stat-label">Active loans</div><div class="stat-val">${activeCount}</div></div>
+      <div class="stat" style="flex:1;min-width:140px"><div class="stat-label">Cleared</div><div class="stat-val green">${clearedCount}</div></div>
     </div>`;
-  const body=document.getElementById('loansBody');
-  if(!D.loans.length){body.innerHTML=`<tr><td colspan="4" style="text-align:center;color:var(--text2);padding:1.5rem">No loans recorded.</td></tr>`;return;}
-  body.innerHTML=D.loans.map(l=>{
-    const act=isAdmin?`<td>
-      ${l.status==='active'?`<button class="btn btn-sm" onclick="clearLoan('${l.id}')">Mark cleared</button> `:''}
-      <button class="btn btn-sm btn-danger" onclick="delLoan('${l.id}')">🗑</button>
-    </td>`:'';
-    const noteStr=l.notes?`<div style="font-size:11px;color:var(--text3);margin-top:2px">${l.notes}</div>`:'';
-    return `<tr><td><span style="font-weight:500">${memberName(l.memberId)}</span>${noteStr}</td><td>KES ${Number(l.amount).toLocaleString()}</td><td><span class="pill pill-${l.status==='active'?'active':'cleared'}">${l.status}</span></td>${act}</tr>`;
+
+  const wrap = document.getElementById('loansCards');
+  if (!D.loans.length) { wrap.innerHTML = `<p style="color:var(--text2);font-size:14px;text-align:center;padding:1.5rem 0">No loans recorded.</p>`; return; }
+
+  wrap.innerHTML = D.loans.map(l => {
+    const cleared = loanIsCleared(l);
+    const totalOwed = loanTotalOwed(l);
+    const paidSoFar = loanTotalPaid(l);
+    const pct = totalOwed ? Math.min(100, Math.round(paidSoFar/totalOwed*100)) : 100;
+    const pBal = loanPrincipalBalance(l);
+    const iBal = loanInterestBalance(l);
+    const histRows = (l.payments||[]).map((p,idx) => `
+      <div class="payment-hist-row">
+        <span>${p.date?p.date:'Payment '+(idx+1)}</span>
+        <span>P: ${Number(p.principal||0).toLocaleString()} + I: ${Number(p.interest||0).toLocaleString()}</span>
+        ${isAdmin?`<span><button class="btn btn-sm btn-danger" style="padding:1px 6px;font-size:10px" onclick="deletePayment('${l.id}',${idx})">🗑</button></span>`:''}
+      </div>`).join('');
+
+    return `<div class="loan-card">
+      <div class="loan-card-head">
+        <span class="loan-name">${memberName(l.memberId)}</span>
+        <span class="pill pill-${cleared?'cleared':'active'}">${cleared?'cleared':'active'}</span>
+      </div>
+      <div class="loan-meta">
+        <div>Principal: <b>KES ${l.principal.toLocaleString()}</b></div>
+        <div>Interest (10%): <b>KES ${l.interest.toLocaleString()}</b></div>
+        <div>Total owed: <b>KES ${totalOwed.toLocaleString()}</b></div>
+        <div>Paid so far: <b>KES ${paidSoFar.toLocaleString()}</b></div>
+        <div>Principal balance: <b>KES ${pBal.toLocaleString()}</b></div>
+        <div>Interest balance: <b>KES ${iBal.toLocaleString()}</b></div>
+      </div>
+      <div class="loan-progress">
+        <div class="progress-bar"><div class="progress-fill ${cleared?'':'amber'}" style="width:${pct}%"></div></div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px">${pct}% repaid</div>
+      </div>
+      ${l.notes?`<div style="font-size:12px;color:var(--text3);margin-bottom:6px">📝 ${l.notes}</div>`:''}
+      ${isAdmin?`<div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${!cleared?`<button class="btn btn-sm btn-primary" onclick="openPaymentModal('${l.id}')">+ Record payment</button>`:''}
+        <button class="btn btn-sm btn-danger" onclick="delLoan('${l.id}')">🗑 Delete loan</button>
+      </div>`:''}
+      ${histRows?`<div class="payment-hist"><b style="color:var(--text2)">Payment history:</b>${histRows}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderEligibility() {
+  const wrap = document.getElementById('eligibilityList');
+  wrap.innerHTML = D.members.map(m => {
+    const contrib = memberTotalContrib(m.id);
+    const outstanding = memberOutstandingLoanTotal(m.id);
+    const pct = contrib > 0 ? Math.round((outstanding/contrib)*100) : (outstanding>0?100:0);
+    const maxEligible = Math.round(contrib * 0.8);
+    const remainingRoom = Math.max(0, maxEligible - outstanding);
+    const isRed = pct > 80;
+    const color = avatarColor(m.name);
+    return `<div class="member-row" style="flex-direction:column;align-items:stretch;gap:6px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="member-avatar" style="background:${color}20;color:${color}">${initials(m.name)}</div>
+          <span style="font-size:14px;font-weight:500">${m.name}</span>
+        </div>
+        <span class="pill pill-${isRed?'red':'green'}">${pct}%</span>
+      </div>
+      <div style="font-size:12px;color:var(--text2);padding-left:42px">
+        Contributions: KES ${contrib.toLocaleString()} · Loan+interest: KES ${outstanding.toLocaleString()}<br>
+        Eligible up to 80%: KES ${maxEligible.toLocaleString()} · Can still borrow: <b style="color:${remainingRoom>0?'#0f6e56':'#a32d2d'}">KES ${remainingRoom.toLocaleString()}</b>
+      </div>
+    </div>`;
   }).join('');
 }
 
 function renderMinutes() {
-  const list=document.getElementById('minutesList');
-  if(!D.minutes.length){list.innerHTML='<p style="color:var(--text2);font-size:14px">No minutes recorded yet.</p>';return;}
-  list.innerHTML=[...D.minutes].sort((a,b)=>b.date.localeCompare(a.date)).map(m=>`
+  const list = document.getElementById('minutesList');
+  if (!D.minutes.length) { list.innerHTML='<p style="color:var(--text2);font-size:14px">No minutes recorded yet.</p>'; return; }
+  list.innerHTML = [...D.minutes].sort((a,b)=>b.date.localeCompare(a.date)).map(m=>`
     <div class="minute-entry">
       <div class="minute-date"><span>${m.date}</span>
         ${isAdmin?`<button class="btn btn-sm btn-danger" onclick="delMinutes('${m.id}')">🗑</button>`:''}
@@ -587,12 +723,12 @@ function renderMinutes() {
 }
 
 function renderAdmin() {
-  document.getElementById('memberCount').textContent=D.members.length;
-  document.getElementById('setAmount').value=D.monthlyAmount;
-  document.getElementById('setCycleMonth').value=D.cycleMonth;
-  const totals={};
-  D.members.forEach(m=>{totals[m.id]=MONTHS.reduce((s,mo)=>s+((D.payments[mo]||{})[m.id]==='paid'?(MONTH_AMOUNTS[mo]||D.monthlyAmount):0),0);});
-  document.getElementById('adminMembersBody').innerHTML=D.members.map((m,i)=>`
+  document.getElementById('memberCount').textContent = D.members.length;
+  document.getElementById('setAmount').value = D.monthlyAmount;
+  document.getElementById('setCycleMonth').value = D.cycleMonth;
+  const totals = {};
+  D.members.forEach(m=>{ totals[m.id]=memberTotalContrib(m.id); });
+  document.getElementById('adminMembersBody').innerHTML = D.members.map((m,i)=>`
     <tr><td style="color:var(--text3)">${i+1}</td><td style="font-weight:500">${m.name}</td>
     <td>KES ${totals[m.id].toLocaleString()}</td>
     <td><button class="btn btn-sm btn-danger" onclick="delMember('${m.id}')">Remove</button></td></tr>`).join('');
@@ -600,10 +736,10 @@ function renderAdmin() {
 }
 
 function renderAdminPayments() {
-  const mo=document.getElementById('adminMonthSel').value;
-  const pay=D.payments[mo]||{};
-  document.getElementById('adminPaymentList').innerHTML=D.members.map(m=>{
-    const paid=pay[m.id]==='paid';
+  const mo = document.getElementById('adminMonthSel').value;
+  const pay = D.payments[mo] || {};
+  document.getElementById('adminPaymentList').innerHTML = D.members.map(m => {
+    const paid = pay[m.id]==='paid';
     return `<div class="member-row">
       <span style="font-size:14px;font-weight:500">${m.name}</span>
       <div style="display:flex;align-items:center;gap:8px">
@@ -641,29 +777,66 @@ async function delMember(id) {
 }
 window.delMember = delMember;
 
+function updateLoanPreview() {
+  const amt = Number(document.getElementById('loanAmount').value||0);
+  const interest = Math.round(amt*LOAN_INTEREST_RATE);
+  document.getElementById('loanPreview').textContent = `Interest (10%): KES ${interest.toLocaleString()} · Total owed: KES ${(amt+interest).toLocaleString()}`;
+}
+window.updateLoanPreview = updateLoanPreview;
+
 async function addLoan() {
   const memberId=document.getElementById('loanMember').value;
-  const amount=document.getElementById('loanAmount').value;
+  const amount=Number(document.getElementById('loanAmount').value);
   const notes=document.getElementById('loanNotes').value.trim();
   if(!memberId||!amount) return;
-  D.loans.push({id:'l_'+Date.now(),memberId,amount:Number(amount),status:'active',notes});
+  D.loans.push(makeLoan('l_'+Date.now(), memberId, amount, notes));
   closeModal('loanModal');
   await saveToFirebase();
 }
 window.addLoan = addLoan;
 
-async function clearLoan(id) {
-  const l=D.loans.find(x=>x.id===id);
-  if(l&&confirm('Mark this loan as cleared?')){l.status='cleared';await saveToFirebase();}
-}
-window.clearLoan = clearLoan;
-
 async function delLoan(id) {
-  if(!confirm('Delete this loan record?')) return;
+  if(!confirm('Delete this loan record? This cannot be undone.')) return;
   D.loans=D.loans.filter(x=>x.id!==id);
   await saveToFirebase();
 }
 window.delLoan = delLoan;
+
+function openPaymentModal(loanId) {
+  activeLoanIdForPayment = loanId;
+  const l = D.loans.find(x=>x.id===loanId);
+  if (!l) return;
+  document.getElementById('paymentLoanInfo').innerHTML =
+    `${memberName(l.memberId)} — Principal balance: <b>KES ${loanPrincipalBalance(l).toLocaleString()}</b>, Interest balance: <b>KES ${loanInterestBalance(l).toLocaleString()}</b>`;
+  document.getElementById('payPrincipal').value='';
+  document.getElementById('payInterest').value='';
+  document.getElementById('payDate').value = new Date().toISOString().slice(0,10);
+  openModal('paymentModal');
+}
+window.openPaymentModal = openPaymentModal;
+
+async function recordPayment() {
+  const l = D.loans.find(x=>x.id===activeLoanIdForPayment);
+  if (!l) return;
+  const principal = Number(document.getElementById('payPrincipal').value||0);
+  const interest = Number(document.getElementById('payInterest').value||0);
+  const date = document.getElementById('payDate').value;
+  if (principal<=0 && interest<=0) return;
+  if (!l.payments) l.payments = [];
+  l.payments.push({date, principal, interest});
+  closeModal('paymentModal');
+  await saveToFirebase();
+}
+window.recordPayment = recordPayment;
+
+async function deletePayment(loanId, idx) {
+  if(!confirm('Delete this payment record?')) return;
+  const l = D.loans.find(x=>x.id===loanId);
+  if (!l) return;
+  l.payments.splice(idx,1);
+  await saveToFirebase();
+}
+window.deletePayment = deletePayment;
 
 async function addMinutes() {
   const date=document.getElementById('minutesDate').value;
@@ -703,6 +876,7 @@ function openModal(id) {
     document.getElementById('loanMember').innerHTML=D.members.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
     document.getElementById('loanAmount').value='';
     document.getElementById('loanNotes').value='';
+    document.getElementById('loanPreview').textContent='Interest (10%): KES 0 · Total owed: KES 0';
   }
   document.getElementById(id).classList.add('open');
 }
